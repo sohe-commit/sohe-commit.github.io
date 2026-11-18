@@ -10,7 +10,7 @@
 body{margin:0;background:#FFFFFF}
 a{color:#222222}a:hover{color:#5F4600}
 @media (max-width: 600px) { h1 { font-size: 40px !important; } h2 { font-size: 28px !important; } }
-@media (max-width: 600px) { .cst { padding: 12px 10px !important; } .cst p:first-child { font-size: 20px !important; } .ccell { padding: 10px 8px !important; } .ccell p { font-size: 11.5px !important; } .ccell p:first-child { font-size: 22px !important; } }
+@media (max-width: 600px) { .cst { padding-left: 10px !important; } .cst p:first-child { font-size: 20px !important; } .ccell { padding: 10px 8px !important; } .ccell p { font-size: 11.5px !important; } .ccell p:first-child { font-size: 22px !important; } }
 
 .sgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .scard { display: flex; flex-direction: column; gap: 14px; }
@@ -18,21 +18,48 @@ a{color:#222222}a:hover{color:#5F4600}
   .scard { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 14px; align-content: start; }
 }
 @media (max-width: 600px) { .sgrid { grid-template-columns: minmax(0, 1fr); } }
+
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+.hdr { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.hdr.scrolled { border-bottom-color: #E5E7EB; }
+.hdr-in { max-width: 1200px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { font-size: 20px; font-weight: 900; text-decoration: none; letter-spacing: -0.02em; white-space: nowrap; }
+.gnb { display: flex; gap: 4px; margin-left: auto; }
+.gnb a, .mnav a { padding: 10px 14px; font-size: 15px; font-weight: 500; text-decoration: none; }
+.hdr-r { display: flex; align-items: center; gap: 8px; }
+.cta { padding: 10px 18px; font-size: 15px; font-weight: 700; text-decoration: none; background: #222222; color: #FFFFFF !important; border-radius: 999px; white-space: nowrap; }
+.mbtn { display: none; width: 44px; height: 44px; border: 0; background: none; padding: 0; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+.mbtn span { display: block; width: 22px; height: 2px; background: #222222; border-radius: 2px; transition: transform .2s, opacity .2s; }
+.mbtn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mbtn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.mbtn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mnav { display: flex; flex-direction: column; padding: 4px 16px 16px; border-top: 1px solid #E5E7EB; }
+.mnav[hidden] { display: none; }
+.mnav a { padding: 14px 4px; font-size: 17px; font-weight: 700; border-bottom: 1px solid #F3F4F6; }
+@media (max-width: 860px) {
+  .gnb { display: none; }
+  .mbtn { display: flex; }
+  .hdr-in { padding: 10px 16px; }
+  .logo { font-size: 18px; }
+  .cta { padding: 8px 14px; font-size: 14px; }
+}
+@media (min-width: 861px) { .mnav { display: none !important; } }
+@media (max-width: 600px) { #top { padding-top: 40px !important; } }
 </style>
 </head>
 <body>
 <div style="font-family: 'Noto Sans KR', system-ui, sans-serif; color: #222222; background: #FFFFFF; word-break: keep-all; line-height: 1.6">
 
-  <header style="max-width: 1200px; margin: 0 auto; padding: 24px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
-    <a href="#top" style="font-size: 20px; font-weight: 900; text-decoration: none; letter-spacing: -0.02em">윤소희 <span style="font-weight: 500">Portfolio</span><span style="color: #FFD200">.</span></a>
-    <nav aria-label="주요 메뉴" style="display: flex; flex-wrap: wrap; gap: 8px">
-      <a href="#profile" style="padding: 10px 14px; font-size: 15px; font-weight: 500; text-decoration: none">프로필</a>
-      <a href="#strength" style="padding: 10px 14px; font-size: 15px; font-weight: 500; text-decoration: none">강점</a>
-      <a href="#product" style="padding: 10px 14px; font-size: 15px; font-weight: 500; text-decoration: none">담당 서비스</a>
-      <a href="#projects" style="padding: 10px 14px; font-size: 15px; font-weight: 500; text-decoration: none">프로젝트</a>
-      <a href="#career" style="padding: 10px 14px; font-size: 15px; font-weight: 500; text-decoration: none">경력</a>
-      <a href="#contact" style="padding: 10px 18px; font-size: 15px; font-weight: 700; text-decoration: none; background: #222222; color: #FFFFFF; border-radius: 999px">연락하기</a>
-    </nav>
+  <header class="hdr">
+    <div class="hdr-in">
+      <a class="logo" href="#top">윤소희 <span style="font-weight: 500">Portfolio</span><span style="color: #FFD200">.</span></a>
+      <nav class="gnb" aria-label="주요 메뉴"><a href="#profile">프로필</a><a href="#strength">강점</a><a href="#product">담당 서비스</a><a href="#projects">프로젝트</a><a href="#career">경력</a></nav>
+      <div class="hdr-r">
+        <a class="cta" href="#contact">연락하기</a>
+        <button class="mbtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <nav id="mnav" class="mnav" aria-label="모바일 메뉴" hidden><a href="#profile">프로필</a><a href="#strength">강점</a><a href="#product">담당 서비스</a><a href="#projects">프로젝트</a><a href="#career">경력</a></nav>
   </header>
 
   <section id="top" style="max-width: 1200px; margin: 0 auto; padding: 72px 32px 88px; display: flex; flex-wrap: wrap; align-items: center; gap: 48px">
@@ -177,7 +204,7 @@ a{color:#222222}a:hover{color:#5F4600}
       <div style="display: flex; flex-wrap: wrap; gap: 20px">
         <div style="flex: 1 1 380px; min-width: 0; padding: 26px 28px; background: #F3F4F6; border-radius: 20px; display: flex; flex-direction: column">
           <p style="margin: 0; font-size: 14px; font-weight: 700; color: #5F6368">당시 상황</p>
-          <div style="display: flex; gap: 12px; margin: auto 0; padding-top: 14px; align-items: stretch"><div class="cst" style="flex: 1 1 0; min-width: 0; padding: 18px 16px; background: #FFFFFF; border-radius: 14px"><p style="margin: 0; font-size: 30px; font-weight: 900; white-space: nowrap; line-height: 1.2">5개+</p><p style="margin: 2px 0 0; font-size: 13px; color: #4B5563">매주 평균 조정 요청 지면</p></div><div class="cst" style="flex: 1 1 0; min-width: 0; padding: 18px 16px; background: #FFFFFF; border-radius: 14px"><p style="margin: 0; font-size: 30px; font-weight: 900; white-space: nowrap; line-height: 1.2">100개+</p><p style="margin: 2px 0 0; font-size: 13px; color: #4B5563">운영자 1명당 광고주</p></div><div class="cst" style="flex: 1 1 0; min-width: 0; padding: 18px 16px; background: #FFFFFF; border-radius: 14px"><p style="margin: 0; font-size: 30px; font-weight: 900; white-space: nowrap; line-height: 1.2">3개</p><p style="margin: 2px 0 0; font-size: 13px; color: #4B5563">따로 보던 성과 화면</p></div></div>
+          <div style="display: flex; gap: 12px; margin: auto 0; padding-top: 14px; align-items: stretch"><div class="cst" style="flex: 1 1 0; min-width: 0; padding-left: 16px; border-left: 2px solid #E5E7EB"><p style="margin: 0; font-size: 36px; font-weight: 900; white-space: nowrap; line-height: 1.2">5개+</p><p style="margin: 2px 0 0; font-size: 13px; color: #4B5563">매주 평균 조정 요청 지면</p></div><div class="cst" style="flex: 1 1 0; min-width: 0; padding-left: 16px; border-left: 2px solid #E5E7EB"><p style="margin: 0; font-size: 36px; font-weight: 900; white-space: nowrap; line-height: 1.2">100개+</p><p style="margin: 2px 0 0; font-size: 13px; color: #4B5563">운영자 1명당 광고주</p></div><div class="cst" style="flex: 1 1 0; min-width: 0; padding-left: 16px; border-left: 2px solid #E5E7EB"><p style="margin: 0; font-size: 36px; font-weight: 900; white-space: nowrap; line-height: 1.2">3개</p><p style="margin: 2px 0 0; font-size: 13px; color: #4B5563">따로 보던 성과 화면</p></div></div>
         </div>
         <div style="flex: 1 1 480px; min-width: 0; padding: 26px 28px; background: #F3F4F6; border-radius: 20px">
           <p style="margin: 0; font-size: 14px; font-weight: 700; color: #5F6368">CPC 조정 판단 단위</p>
@@ -338,5 +365,14 @@ a{color:#222222}a:hover{color:#5F4600}
     </div>
   </footer>
 </div>
+<script>
+(function(){
+  var h=document.querySelector('.hdr'),b=document.querySelector('.mbtn'),m=document.getElementById('mnav');
+  function close(){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','메뉴 열기');m.hidden=true;}
+  b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';if(o){close();}else{b.setAttribute('aria-expanded','true');b.setAttribute('aria-label','메뉴 닫기');m.hidden=false;}});
+  m.addEventListener('click',function(e){if(e.target.tagName==='A')close();});
+  window.addEventListener('scroll',function(){h.classList.toggle('scrolled',window.scrollY>8);},{passive:true});
+})();
+</script>
 </body>
 </html>
